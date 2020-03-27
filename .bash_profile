@@ -1,0 +1,1 @@
+startx /etc/X11/Xsession /opt/kiosk.sh --

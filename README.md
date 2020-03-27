@@ -102,6 +102,7 @@ for you to able to install a required package
     [Service]
     ExecStart=
     ExecStart=-/sbin/agetty --autologin user --noclear %I $TERM
+    Type=idle
     ````    
 
 * Update Grub

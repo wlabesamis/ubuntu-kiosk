@@ -37,9 +37,14 @@ sudo systemctl enable getty@tty2
 sudo systemctl enable getty@tty3
 
 #Enable auto login in tty1
-sudo systemctl edit getty@tty1
+sudo install -b -m 644 /dev/stdin /etc/systemd/system/getty\@tty1.service.d/override.conf << EOF
+[Service]
+ExecStart=
+ExexStart=-/sbin/agetty --autologin kiosk --noclear %I $TERM
+Type=idle
+EOF
 
 #install kiosh script
-sudo cp kiosh.sh /opt/kiosk.sh
+sudo cp kiosk.sh /opt/
 sudo chmod +x /opt/kiosk.sh
 sudo cp .bash_profile ~/.bash_profile

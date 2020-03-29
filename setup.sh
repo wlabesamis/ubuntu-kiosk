@@ -18,18 +18,10 @@ sudo apt update -y
 sudo apt install -y --no-install-recommends xorg openbox google-chrome-stable pulseaudio
 sudo usermod -a -G audio $USER
 
-#Add new user
-sudo adduser user
-sudo usermod -aG sudo user
-
 #Install xserver-xorg-legacy and choose "Anybody"
 sudo apt install xserver-xorg-legacy
 sudo dpkg-reconfigure xserver-xorg-legacy
 sudo echo "needs_root_rights=yes" >> /etc/X11/Xwrapper.config
-
-#Do not load the desktop
-sudo systemctl enable multi-user.target --force
-sudo systemctl set-default multi-user.target
 
 #Enable tty1 tty2 tty3
 sudo systemctl enable getty@tty1
@@ -44,7 +36,9 @@ ExexStart=-/sbin/agetty --autologin kiosk --noclear %I $TERM
 Type=idle
 EOF
 
-#install kiosh script
+#install kiosh service
 sudo cp kiosk.sh /opt/
 sudo chmod +x /opt/kiosk.sh
-sudo cp .bash_profile ~/.bash_profile
+sudo cp kiosk.service > /etc/systemd/system/
+sudo systemctl enable kiosk.service
+sudo systemctl start kiosk.service

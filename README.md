@@ -11,7 +11,8 @@ These instructions will give you an instruction on how to setup a chrome kiosk u
 Make sure you have installed the following prerequisites
 
 Note: Installing Ubuntu Server 18.04 required an internet connection 
-for you to able to install a required package
+for you to able to install a required package, create a "kiosk" user, this user will
+be use in the setup later
 
 * Ubuntu Server 18.04 - [Download](https://ubuntu.com/download/server/thank-you?version=18.04.4&architecture=amd64)
 * Install Ubuntu Server 18.04 [HOW TO](https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview)
@@ -19,7 +20,8 @@ for you to able to install a required package
 
 ### Steps
 
-* After you successfully installed the Ubuntu Server 18.04 need to install the following package
+* After you successfully installed the Ubuntu Server 18.04 need to install the following package, the 4th line
+is a wifi setup wherein the SSID is the name of your WIFI and password is the password of your wifi
         
     ```
     sudo apt install network-manager
@@ -38,37 +40,13 @@ for you to able to install a required package
   
     sudo usermod -a -G audio $USER
     ````  
-* Add new user
-    ````
-    sudo adduser user
-    sudo usermod -aG sudo user
-    ````
   
-* Loading Browser on Boot
+* Installing kiosk script, this script will open a chrome browser
     * Run the command below, it will clear a chrome session and configuration and load the 
     chrome browser
     
     ````
-    sudo vi /opt/kiosk.sh
-    ````
-  
-    * Here's the content of /opt/kiosk.sh
-    ````
-    #!/bin/bash
-    
-    xset -dpms
-    xset s off
-    openbox-session &
-    start-pulseaudio-x11
-    
-    while true; do
-      rm -rf ~/.{config,cache}/google-chrome/
-      google-chrome --kiosk --no-first-run  'http://thepcspy.com'
-    done
-    ````
-  
-    * Run the command below to make the script executable. 
-    ````
+    sudo cp kiosk.sh /opt/
     sudo chmod +x /opt/kiosk.sh
     ````
     
@@ -80,73 +58,44 @@ for you to able to install a required package
   
     * Modify the /etc/X11/Xwrapper.config
     ````
-    sudo vi /etc/X11/Xwrapper.config
-    ````
-  
-    * Add the following line
-    ````
-    needs_root_rights=yes
+    sudo echo "needs_root_rights=yes" >> /etc/X11/Xwrapper.config
     ````
 
 * Autologin user
     * Run the command below
     ````
-    systemctl enable getty@tty1
-    systemctl edit getty@tty1
+    sudo systemctl enable getty@tty1
+    sudo systemctl edit getty@tty1
     ````
   
     * See below for the content
-    Note: Replace the user in "--autologin user" with the user being use
-           during ubuntu server setup 
+    Note: As you can see in the autologin we use "kiosk" user, this user was
+    created during Ubuntu Server 18.04 installation 
     ````
     [Service]
     ExecStart=
-    ExecStart=-/sbin/agetty --autologin user --noclear %I $TERM
+    ExecStart=-/sbin/agetty --autologin kiosk --noclear %I $TERM
     Type=idle
     ````    
 
 * Update Grub
     * Modify the /etc/default/grub
     ````
-    sudo vi /etc/default/grub
-    ````
-  
-    * Update the file based on the content below
-    ````
-    GRUB_DEFAULT=0
-    GRUB_HIDDEN_TIMEOUT=0
-    GRUB_HIDDEN_TIMEOUT_QUIET=true
-    GRUB_TIMEOUT=0
-    GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
-    GRUB_CMDLINE_LINUX_DEFAULT="text"
-    GRUB_CMDLINE_LINUX=""
-    GRUB_TERMINAL=console
-    ````
-  
-    * Save the changes
-    ````
+    sudo cp grub /etc/default/grub
     sudo update-grub
     ````
   
-    * Do not load the desktop
-    ````
-    sudo systemctl enable multi-user.target --force
-    sudo systemctl set-default multi-user.target
-    ````
-  
-    * Enable tty2
+    * Enable tty2 and tty3
     ````
     sudo systemctl enable getty@tty2
+    sudo systemctl enable getty@tty3
     ````
   
-* Starting X and load the /opt/kiosk.sh, run the command below
+* Start kiosk service, run the command below
     ````
-    sudo vi ~/.bash_profile
-    ````
-    
-    * Here's the content of ~/.bash_profile
-    ````
-    startx /etc/X11/Xsession /opt/kiosk.sh --
+    sudo cp kiosk.service /etc/systemd/system/
+    sudo systemctl enable kiosk.service
+    sudo systemctl start kiosk.service
     ````
 
 ### Basic trouble shooting

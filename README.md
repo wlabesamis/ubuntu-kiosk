@@ -69,7 +69,7 @@ is a wifi setup wherein the SSID is the name of your WIFI and password is the pa
     ````
   
     * See below for the content
-    Note: As you can see in the autologin we use "kiosk" user, this user was
+    * Note: As you can see in the autologin we use "kiosk" user, this user was
     created during Ubuntu Server 18.04 installation 
     ````
     [Service]

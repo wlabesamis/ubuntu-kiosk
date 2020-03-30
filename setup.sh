@@ -1,4 +1,7 @@
-#Install google chrome xorg and openbox
+#Install google chrome, xorg, xserver-xorg-legacy, openbox and pulseaudio
+sudo add-apt-repository 'deb http://dl.google.com/linux/chrome/deb/ stable main'
+wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
 sudo apt update -y
 sudo apt install -y --no-install-recommends xorg openbox google-chrome-stable pulseaudio xserver-xorg-legacy
 sudo usermod -a -G audio $USER

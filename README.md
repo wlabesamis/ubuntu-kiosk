@@ -33,6 +33,9 @@ the command below if you are using LAN.
 * Install required packages
 
     ````
+    sudo add-apt-repository 'deb http://dl.google.com/linux/chrome/deb/ stable main'
+    wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  
     sudo apt update
     sudo apt install --no-install-recommends xorg openbox google-chrome-stable pulseaudio xserver-xorg-legacy
   

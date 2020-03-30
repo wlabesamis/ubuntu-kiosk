@@ -33,6 +33,8 @@ the command below if you are using LAN.
 * Install required packages
 
     ````
+    wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  
     sudo apt update
     sudo apt install --no-install-recommends xorg openbox google-chrome-stable pulseaudio xserver-xorg-legacy
   

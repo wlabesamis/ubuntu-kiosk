@@ -1,4 +1,18 @@
+#Install network manager
+#sudo apt install network-manager -y
+#sudo systemctl enable NetworkManager
+#sudo service NetworkManager start
+
+#Connect to WIFI
+#echo "please enter SSID to connect to wifi"
+#read SSID
+#echo "please enter SSID password"
+#read PASSWORD
+#sudo nmcli dev wifi con $SSID password $PASSWORD
+
 #Install google chrome xorg and openbox
+wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
 sudo apt update -y
 sudo apt install -y --no-install-recommends xorg openbox google-chrome-stable pulseaudio xserver-xorg-legacy
 sudo usermod -a -G audio $USER

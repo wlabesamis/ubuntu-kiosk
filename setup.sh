@@ -11,9 +11,6 @@
 #sudo nmcli dev wifi con $SSID password $PASSWORD
 
 #Install google chrome xorg and openbox
-sudo add-apt-repository 'deb http://dl.google.com/linux/chrome/deb/ stable main'
-wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
 sudo apt update -y
 sudo apt install -y --no-install-recommends xorg openbox google-chrome-stable pulseaudio xserver-xorg-legacy
 sudo usermod -a -G audio $USER

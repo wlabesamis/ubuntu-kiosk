@@ -90,7 +90,8 @@ the command below if you are using LAN.
     sudo systemctl start kiosk.service
     ````
 
-### Basic trouble shooting
+* Video Tutorial
+https://youtu.be/cLiX62QhB9U
 
 
 ## Authors

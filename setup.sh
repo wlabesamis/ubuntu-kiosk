@@ -23,6 +23,10 @@ ExexStart=-/sbin/agetty --autologin kiosk --noclear %I $TERM
 Type=idle
 EOF
 
+#Update Grub
+sudo cp grub /etc/default/grub
+sudo update-grub
+
 #install kiosh service
 sudo cp kiosk.sh /opt/
 sudo chmod +x /opt/kiosk.sh

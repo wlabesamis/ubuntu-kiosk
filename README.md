@@ -66,8 +66,7 @@ the command below if you are using LAN.
   
     * Enable tty2 and tty3
     ````
-    sudo systemctl enable getty@tty2
-    sudo systemctl enable getty@tty3
+    sudo systemctl enable getty@tty2 getty@tty3
     ````
   
 * Start kiosk service, run the command below

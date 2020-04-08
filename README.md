@@ -55,21 +55,8 @@ the command below if you are using LAN.
     ````
     sudo sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config
     echo "needs_root_rights=yes" | sudo tee -a /etc/X11/Xwrapper.config
-    ````
 
-* Autologin user
-    * Run the command below
-    * Note: As you can see in the autologin we use "kiosk" user, this user was
-        created during Ubuntu Server 18.04 installation 
-    ````
-    sudo systemctl enable getty@tty1
-    sudo install -b -m 644 /dev/stdin /etc/systemd/system/getty\@tty1.service.d/override.conf << EOF
-    [Service]
-    ExecStart=
-    ExexStart=-/sbin/agetty --autologin kiosk --noclear %I $TERM
-    Type=idle
-    EOF
-    ````
+
 * Update Grub
     * Modify the /etc/default/grub
     ````

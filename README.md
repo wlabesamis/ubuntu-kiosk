@@ -15,7 +15,7 @@ for you to able to install a required package, create a "kiosk" user, this user 
 be use in the setup later
 
 * Ubuntu Server 18.04 - [Download](https://ubuntu.com/download/server/thank-you?version=18.04.4&architecture=amd64)
-* [HOW TO Install](https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview) Ubuntu Server 18.04
+* Setup for Ubuntu Server - [Video](https://www.youtube.com/watch?v=XXsrECecr5M)
 
 
 ### Steps

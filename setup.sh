@@ -17,6 +17,10 @@ sudo systemctl enable getty@tty1 getty@tty2 getty@tty3
 sudo cp grub /etc/default/grub
 sudo update-grub
 
+# Update Grub
+sudo cp grub /etc/default/grub
+sudo update-grub
+
 #install kiosh service
 sudo cp kiosk.sh /opt/
 sudo chmod +x /opt/kiosk.sh
